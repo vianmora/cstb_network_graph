@@ -1,0 +1,155 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 600px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#15443C", "id": "Madeleine DEVYS", "label": "Madeleine DEVYS", "shape": "dot"}, {"color": "#15443C", "id": "Jean-Baptiste DE FOUCHIER", "label": "Jean-Baptiste DE FOUCHIER", "shape": "dot"}, {"color": "#15443C", "id": "Caroline BOUTELOUP", "label": "Caroline BOUTELOUP", "shape": "dot"}, {"color": "#15443C", "id": "Nicolas BOURBON", "label": "Nicolas BOURBON", "shape": "dot"}, {"color": "#15443C", "id": "Fanny ARRAYET", "label": "Fanny ARRAYET", "shape": "dot"}, {"color": "#15443C", "id": "Vianney MORAIN", "label": "Vianney MORAIN", "shape": "dot"}, {"color": "#15443C", "id": "Rofaida LAHRECH ", "label": "Rofaida LAHRECH ", "shape": "dot"}, {"color": "#15443C", "id": "To\u00e0n VO", "label": "To\u00e0n VO", "shape": "dot"}, {"color": "#15443C", "id": "Olivier GRELOU", "label": "Olivier GRELOU", "shape": "dot"}, {"color": "#15443C", "id": "Tania ABI MOUSSA", "label": "Tania ABI MOUSSA", "shape": "dot"}, {"color": "#15443C", "id": "Antoine BREITWILLER ", "label": "Antoine BREITWILLER ", "shape": "dot"}, {"color": "#15443C", "id": "Simon LIGIER", "label": "Simon LIGIER", "shape": "dot"}, {"color": "#15443C", "id": "Lydie LAIGLE ", "label": "Lydie LAIGLE ", "shape": "dot"}, {"color": "#C3443C", "id": "Coup de pouce", "label": "Coup de pouce", "shape": "dot"}, {"color": "#C3443C", "id": "COMEPOS", "label": "COMEPOS", "shape": "dot"}, {"color": "#C3443C", "id": "Justice et environnement ", "label": "Justice et environnement ", "shape": "dot"}, {"color": "#C3443C", "id": "REPERE Polygone St Priva", "label": "REPERE Polygone St Priva", "shape": "dot"}, {"color": "#C3443C", "id": "ANR REHA-PARCS", "label": "ANR REHA-PARCS", "shape": "dot"}, {"color": "#C3443C", "id": "\u00c9coQuartier", "label": "\u00c9coQuartier", "shape": "dot"}, {"color": "#C3443C", "id": "PECOIC", "label": "PECOIC", "shape": "dot"}, {"color": "#C3443C", "id": "Simulateur_Smart Home", "label": "Simulateur_Smart Home", "shape": "dot"}, {"color": "#C3443C", "id": "Icare", "label": "Icare", "shape": "dot"}, {"color": "#C3443C", "id": "EPC Recast", "label": "EPC Recast", "shape": "dot"}, {"color": "#C3443C", "id": "EuB_SuperHub", "label": "EuB_SuperHub", "shape": "dot"}, {"color": "#C3443C", "id": "EEE31_SKETCH PARC", "label": "EEE31_SKETCH PARC", "shape": "dot"}, {"color": "#C3443C", "id": "REHAPARC ", "label": "REHAPARC ", "shape": "dot"}, {"color": "#C3443C", "id": "RenoStandard", "label": "RenoStandard", "shape": "dot"}, {"color": "#C3443C", "id": "R\u0026D_BPCE", "label": "R\u0026D_BPCE", "shape": "dot"}, {"color": "#C3443C", "id": "LoPACC", "label": "LoPACC", "shape": "dot"}, {"color": "#C3443C", "id": "Maison \u0026 Cit\u00e9", "label": "Maison \u0026 Cit\u00e9", "shape": "dot"}, {"color": "#C3443C", "id": "GoRenove", "label": "GoRenove", "shape": "dot"}, {"color": "#C3443C", "id": "REPERE 3F/TSAR", "label": "REPERE 3F/TSAR", "shape": "dot"}, {"color": "#C3443C", "id": "Turnkey Retrofit", "label": "Turnkey Retrofit", "shape": "dot"}, {"color": "#C3443C", "id": "CEN_CE", "label": "CEN_CE", "shape": "dot"}, {"color": "#C3443C", "id": "Plan de Relance", "label": "Plan de Relance", "shape": "dot"}, {"color": "#C3443C", "id": "RenoZEB", "label": "RenoZEB", "shape": "dot"}, {"color": "#C3443C", "id": "DPE Reforme", "label": "DPE Reforme", "shape": "dot"}, {"color": "#C3443C", "id": "ECCO-DOM", "label": "ECCO-DOM", "shape": "dot"}, {"color": "#C3443C", "id": "VERELEC", "label": "VERELEC", "shape": "dot"}, {"color": "#C3443C", "id": "BIM-SPEED", "label": "BIM-SPEED", "shape": "dot"}, {"color": "#C3443C", "id": "CAD Nanterre", "label": "CAD Nanterre", "shape": "dot"}, {"color": "#C3443C", "id": "ACV cons\u00e9quentielle", "label": "ACV cons\u00e9quentielle", "shape": "dot"}, {"color": "#C3443C", "id": "MISSION CONJOINTE ADEME-CSTB", "label": "MISSION CONJOINTE ADEME-CSTB", "shape": "dot"}, {"color": "#C3443C", "id": "MEREEN", "label": "MEREEN", "shape": "dot"}, {"color": "#C3443C", "id": "Contrat avec l\u2019ADEME", "label": "Contrat avec l\u2019ADEME", "shape": "dot"}, {"color": "#C3443C", "id": "BATENQUE", "label": "BATENQUE", "shape": "dot"}, {"color": "#C3443C", "id": "OPERAT", "label": "OPERAT", "shape": "dot"}, {"color": "#C3443C", "id": "PREPARER 2050", "label": "PREPARER 2050", "shape": "dot"}, {"color": "#C3443C", "id": "CAPCLIM -AAP MITI B\u00e2timent", "label": "CAPCLIM -AAP MITI B\u00e2timent", "shape": "dot"}, {"color": "#C3443C", "id": "CAPADAPT ", "label": "CAPADAPT ", "shape": "dot"}, {"color": "#C3443C", "id": "Contrat avec DHUP", "label": "Contrat avec DHUP", "shape": "dot"}, {"color": "#C3443C", "id": "Th\u00e8se Nicolas Bourbon", "label": "Th\u00e8se Nicolas Bourbon", "shape": "dot"}, {"color": "#C3443C", "id": "Contrat avec CSTB/GRDF", "label": "Contrat avec CSTB/GRDF", "shape": "dot"}, {"color": "#C3443C", "id": "UE H2020 ALDREN", "label": "UE H2020 ALDREN", "shape": "dot"}]);
+                  edges = new vis.DataSet([{"from": "Coup de pouce", "to": "Madeleine DEVYS"}, {"from": "Coup de pouce", "to": "Fanny ARRAYET"}, {"from": "COMEPOS", "to": "Lydie LAIGLE "}, {"from": "Justice et environnement ", "to": "Lydie LAIGLE "}, {"from": "REPERE Polygone St Priva", "to": "Antoine BREITWILLER "}, {"from": "ANR REHA-PARCS", "to": "Simon LIGIER"}, {"from": "\u00c9coQuartier", "to": "Lydie LAIGLE "}, {"from": "PECOIC", "to": "Rofaida LAHRECH "}, {"from": "PECOIC", "to": "Antoine BREITWILLER "}, {"from": "Simulateur_Smart Home", "to": "Antoine BREITWILLER "}, {"from": "Simulateur_Smart Home", "to": "Jean-Baptiste DE FOUCHIER"}, {"from": "Icare", "to": "Jean-Baptiste DE FOUCHIER"}, {"from": "Icare", "to": "Antoine BREITWILLER "}, {"from": "Icare", "to": "Olivier GRELOU"}, {"from": "Icare", "to": "Rofaida LAHRECH "}, {"from": "EPC Recast", "to": "Jean-Baptiste DE FOUCHIER"}, {"from": "EPC Recast", "to": "Antoine BREITWILLER "}, {"from": "EPC Recast", "to": "Caroline BOUTELOUP"}, {"from": "EPC Recast", "to": "Madeleine DEVYS"}, {"from": "EPC Recast", "to": "Olivier GRELOU"}, {"from": "EPC Recast", "to": "Rofaida LAHRECH "}, {"from": "EuB_SuperHub", "to": "Caroline BOUTELOUP"}, {"from": "EuB_SuperHub", "to": "Simon LIGIER"}, {"from": "EuB_SuperHub", "to": "Olivier GRELOU"}, {"from": "EEE31_SKETCH PARC", "to": "Olivier GRELOU"}, {"from": "EEE31_SKETCH PARC", "to": "Madeleine DEVYS"}, {"from": "EEE31_SKETCH PARC", "to": "Fanny ARRAYET"}, {"from": "EEE31_SKETCH PARC", "to": "Caroline BOUTELOUP"}, {"from": "REHAPARC ", "to": "Simon LIGIER"}, {"from": "REHAPARC ", "to": "Jean-Baptiste DE FOUCHIER"}, {"from": "REHAPARC ", "to": "Caroline BOUTELOUP"}, {"from": "REHAPARC ", "to": "Olivier GRELOU"}, {"from": "RenoStandard", "to": "Simon LIGIER"}, {"from": "RenoStandard", "to": "To\u00e0n VO"}, {"from": "RenoStandard", "to": "Rofaida LAHRECH "}, {"from": "RenoStandard", "to": "Madeleine DEVYS"}, {"from": "RenoStandard", "to": "Olivier GRELOU"}, {"from": "RenoStandard", "to": "Jean-Baptiste DE FOUCHIER"}, {"from": "RenoStandard", "to": "Tania ABI MOUSSA"}, {"from": "RenoStandard", "to": "Lydie LAIGLE "}, {"from": "R\u0026D_BPCE", "to": "Antoine BREITWILLER "}, {"from": "LoPACC", "to": "Antoine BREITWILLER "}, {"from": "Maison \u0026 Cit\u00e9", "to": "Caroline BOUTELOUP"}, {"from": "Maison \u0026 Cit\u00e9", "to": "Madeleine DEVYS"}, {"from": "Maison \u0026 Cit\u00e9", "to": "Rofaida LAHRECH "}, {"from": "GoRenove", "to": "Antoine BREITWILLER "}, {"from": "GoRenove", "to": "Vianney MORAIN"}, {"from": "REPERE 3F/TSAR", "to": "Antoine BREITWILLER "}, {"from": "Turnkey Retrofit", "to": "Madeleine DEVYS"}, {"from": "Turnkey Retrofit", "to": "Jean-Baptiste DE FOUCHIER"}, {"from": "Turnkey Retrofit", "to": "Tania ABI MOUSSA"}, {"from": "Turnkey Retrofit", "to": "Caroline BOUTELOUP"}, {"from": "CEN_CE", "to": "Tania ABI MOUSSA"}, {"from": "Plan de Relance", "to": "Simon LIGIER"}, {"from": "Plan de Relance", "to": "To\u00e0n VO"}, {"from": "Plan de Relance", "to": "Fanny ARRAYET"}, {"from": "Plan de Relance", "to": "Caroline BOUTELOUP"}, {"from": "RenoZEB", "to": "Simon LIGIER"}, {"from": "RenoZEB", "to": "To\u00e0n VO"}, {"from": "RenoZEB", "to": "Madeleine DEVYS"}, {"from": "DPE Reforme", "to": "Nicolas BOURBON"}, {"from": "ECCO-DOM", "to": "Simon LIGIER"}, {"from": "ECCO-DOM", "to": "To\u00e0n VO"}, {"from": "ECCO-DOM", "to": "Fanny ARRAYET"}, {"from": "ECCO-DOM", "to": "Lydie LAIGLE "}, {"from": "ECCO-DOM", "to": "Tania ABI MOUSSA"}, {"from": "ECCO-DOM", "to": "Caroline BOUTELOUP"}, {"from": "VERELEC", "to": "To\u00e0n VO"}, {"from": "VERELEC", "to": "Simon LIGIER"}, {"from": "BIM-SPEED", "to": "Antoine BREITWILLER "}, {"from": "BIM-SPEED", "to": "Caroline BOUTELOUP"}, {"from": "CAD Nanterre", "to": "Caroline BOUTELOUP"}, {"from": "CAD Nanterre", "to": "Fanny ARRAYET"}, {"from": "ACV cons\u00e9quentielle", "to": "Olivier GRELOU"}, {"from": "MISSION CONJOINTE ADEME-CSTB", "to": "Rofaida LAHRECH "}, {"from": "MISSION CONJOINTE ADEME-CSTB", "to": "Antoine BREITWILLER "}, {"from": "MEREEN", "to": "Antoine BREITWILLER "}, {"from": "Contrat avec l\u2019ADEME", "to": "Rofaida LAHRECH "}, {"from": "Contrat avec l\u2019ADEME", "to": "Madeleine DEVYS"}, {"from": "BATENQUE", "to": "Rofaida LAHRECH "}, {"from": "BATENQUE", "to": "Antoine BREITWILLER "}, {"from": "OPERAT", "to": "Simon LIGIER"}, {"from": "OPERAT", "to": "Olivier GRELOU"}, {"from": "OPERAT", "to": "Caroline BOUTELOUP"}, {"from": "PREPARER 2050", "to": "Rofaida LAHRECH "}, {"from": "PREPARER 2050", "to": "Madeleine DEVYS"}, {"from": "CAPCLIM -AAP MITI B\u00e2timent", "to": "Lydie LAIGLE "}, {"from": "CAPCLIM -AAP MITI B\u00e2timent", "to": "Tania ABI MOUSSA"}, {"from": "CAPADAPT ", "to": "Lydie LAIGLE "}, {"from": "Contrat avec DHUP", "to": "Rofaida LAHRECH "}, {"from": "Th\u00e8se Nicolas Bourbon", "to": "Rofaida LAHRECH "}, {"from": "Th\u00e8se Nicolas Bourbon", "to": "Antoine BREITWILLER "}, {"from": "Th\u00e8se Nicolas Bourbon", "to": "Nicolas BOURBON"}, {"from": "Contrat avec CSTB/GRDF", "to": "Rofaida LAHRECH "}, {"from": "Contrat avec CSTB/GRDF", "to": "Madeleine DEVYS"}, {"from": "UE H2020 ALDREN", "to": "Simon LIGIER"}, {"from": "UE H2020 ALDREN", "to": "Jean-Baptiste DE FOUCHIER"}, {"from": "UE H2020 ALDREN", "to": "Olivier GRELOU"}, {"from": "UE H2020 ALDREN", "to": "Rofaida LAHRECH "}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
