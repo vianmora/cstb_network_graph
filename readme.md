@@ -1,6 +1,7 @@
 Visualiser le graphique des projets RGP
 
-[Fiche de cadrage]([diagramme de l'équipe - cadrage.docx](https://cstbgroup.sharepoint.com/:w:/r/sites/01_INT_DEE_Division_RGP_306/Documents partages/Administratif/diagramme de l'équipe - cadrage.docx?d=w133641e911294c1c97726dc3cc8f89d3&csf=1&web=1&e=BPa3pi))
+[Site pour visualiser le graphique](https://vmorain.perso.centrale-marseille.fr/)  
+[Fiche de cadrage](https://cstbgroup.sharepoint.com/:w:/r/sites/01_INT_DEE_Division_RGP_306/_layouts/15/Doc.aspx?sourcedoc=%7B133641E9-1129-4C1C-9772-6DC3CC8F89D3%7D&file=diagramme%20de%20l%27%C3%A9quipe%20-%20cadrage.docx&action=default&mobileredirect=true)
 
  TODO :
 
