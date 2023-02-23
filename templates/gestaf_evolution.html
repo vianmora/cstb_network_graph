@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>gestafEvolution</title>
+    <script src="https://unpkg.com/angular/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+<body ng-app="myApp" ng-controller="myCtrl" >
+    <div id="mynetwork"></div>
+</body>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</html>

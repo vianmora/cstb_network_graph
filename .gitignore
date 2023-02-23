@@ -1,3 +1,2 @@
-secrets.yml
-__pycache__*
-.ipynb_checkpoints
+/app/src/secrets.yml
+/.idea
